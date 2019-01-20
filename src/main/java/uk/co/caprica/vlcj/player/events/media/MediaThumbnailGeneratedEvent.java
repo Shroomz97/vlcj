@@ -17,31 +17,26 @@
  * Copyright 2009-2019 Caprica Software Limited.
  */
 
-package uk.co.caprica.vlcj.binding.internal;
+package uk.co.caprica.vlcj.player.events.media;
 
-import com.sun.jna.Structure;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.binding.internal.*;
+import uk.co.caprica.vlcj.media.Media;
+import uk.co.caprica.vlcj.media.Picture;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+final class MediaThumbnailGeneratedEvent extends MediaEvent {
 
-/**
- *
- */
-public class media_thumbnail_generated extends Structure {
+    private final libvlc_picture_t thumbnail;
 
-    /**
-     *
-     */
-    private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList("p_thumbnail"));
-
-    /**
-     *
-     */
-    public libvlc_picture_t p_thumbnail;
+    MediaThumbnailGeneratedEvent(LibVlc libvlc, Media media, libvlc_event_t event) {
+        super(libvlc, media);
+        this.thumbnail = ((media_thumbnail_generated) event.u.getTypedValue(media_thumbnail_generated.class)).p_thumbnail;
+    }
 
     @Override
-    protected List<String> getFieldOrder() {
-        return FIELD_ORDER;
+    public void notify(MediaEventListener listener) {
+        Picture picture = new Picture(libvlc, thumbnail);
+        listener.mediaThumbnailGenerated(media, picture);
     }
+
 }

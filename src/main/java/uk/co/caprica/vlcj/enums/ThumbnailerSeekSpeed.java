@@ -17,31 +17,39 @@
  * Copyright 2009-2019 Caprica Software Limited.
  */
 
-package uk.co.caprica.vlcj.binding.internal;
+package uk.co.caprica.vlcj.enums;
 
-import com.sun.jna.Structure;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
+ * Enumeration of picture types.
  */
-public class media_thumbnail_generated extends Structure {
+public enum ThumbnailerSeekSpeed {
 
-    /**
-     *
-     */
-    private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList("p_thumbnail"));
+    PRECISE(0),
+    FAST   (1);
 
-    /**
-     *
-     */
-    public libvlc_picture_t p_thumbnail;
+    private static final Map<Integer, ThumbnailerSeekSpeed> INT_MAP = new HashMap<Integer, ThumbnailerSeekSpeed>();
 
-    @Override
-    protected List<String> getFieldOrder() {
-        return FIELD_ORDER;
+    static {
+        for(ThumbnailerSeekSpeed event : ThumbnailerSeekSpeed.values()) {
+            INT_MAP.put(event.intValue, event);
+        }
     }
+
+    public static ThumbnailerSeekSpeed pictureType(int intValue) {
+        return INT_MAP.get(intValue);
+    }
+
+    private final int intValue;
+
+    ThumbnailerSeekSpeed(int intValue) {
+        this.intValue = intValue;
+    }
+
+    public int intValue() {
+        return intValue;
+    }
+
 }
