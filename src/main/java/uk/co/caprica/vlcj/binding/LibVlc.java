@@ -1157,13 +1157,18 @@ public interface LibVlc extends Library {
     long libvlc_media_player_get_time(libvlc_media_player_t p_mi);
 
     /**
-     * Set the movie time (in ms). This has no effect if no media is being played. Not all formats
-     * and protocols support this.
+     * Set the movie time (in ms).
+     * <p>
+     * This has no effect if no media is being played.
+     * <p>
+     * Not all formats and protocols support this.
      *
      * @param p_mi the Media Player
      * @param i_time the movie time (in ms).
+     * @param b_fast prefer fast seeking or precise seeking
+     * @return 0 on success, -1 on error
      */
-    void libvlc_media_player_set_time(libvlc_media_player_t p_mi, long i_time);
+    int libvlc_media_player_set_time(libvlc_media_player_t p_mi, long i_time, int b_tast);
 
     /**
      * Get movie position.
@@ -1174,13 +1179,18 @@ public interface LibVlc extends Library {
     float libvlc_media_player_get_position(libvlc_media_player_t p_mi);
 
     /**
-     * Set movie position. This has no effect if playback is not enabled. This might not work
-     * depending on the underlying input format and protocol.
+     * Set movie position as percentage between 0.0 and 1.0.
+     * <p>
+     * This has no effect if playback is not enabled.
+     * <p>
+     * This might not work depending on the underlying input format and protocol.
      *
      * @param p_mi the Media Player
      * @param f_pos the position
+     * @param b_fast prefer fast seeking or precise seeking
+     * @return 0 on success, -1 on error
      */
-    void libvlc_media_player_set_position(libvlc_media_player_t p_mi, float f_pos);
+    int libvlc_media_player_set_position(libvlc_media_player_t p_mi, float f_pos, int b_fast);
 
     /**
      * Set movie chapter (if applicable).
