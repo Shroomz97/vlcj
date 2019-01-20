@@ -68,13 +68,13 @@ public final class ControlsService extends BaseService {
      * <p>
      * To skip backwards specify a negative delta.
      * <p>
-     * Fast seeking is used.
+     * Precise seeking is used.
      *
      * @param delta time period, in milliseconds
      * @return <code>true</code> if successful; <code>false</code> otherwise
      */
     public boolean skip(long delta) {
-        return skip(delta, true);
+        return skip(delta, false);
     }
 
     /**
@@ -82,13 +82,13 @@ public final class ControlsService extends BaseService {
      * <p>
      * To skip backwards specify a negative delta.
      * <p>
-     * Fast seeking is used.
+     * Precise seeking is used.
      *
      * @param delta amount to skip
      * @return <code>true</code> if successful; <code>false</code> otherwise
      */
     public boolean skipPosition(float delta) {
-        return skipPosition(delta, true);
+        return skipPosition(delta, false);
     }
 
     /**
@@ -132,13 +132,13 @@ public final class ControlsService extends BaseService {
      * <p>
      * If the requested time is less than zero, it is normalised to zero.
      * <p>
-     * Fast seeking is used.
+     * Precise seeking is used.
      *
      * @param time time since the beginning, in milliseconds
      * @return <code>true</code> if successful; <code>false</code> otherwise
      */
     public boolean setTime(long time) {
-        return setTime(time, true);
+        return setTime(time, false);
     }
 
     /**
@@ -146,13 +146,13 @@ public final class ControlsService extends BaseService {
      * <p>
      * If the requested position is less than zero, it is normalised to zero.
      * <p>
-     * Fast seeking is used.
+     * Precise seeking is used.
      *
      * @param position position value, a percentage (e.g. 0.15 is 15%)
      * @return <code>true</code> if successful; <code>false</code> otherwise
      */
     public boolean setPosition(float position) {
-        return setPosition(position, true);
+        return setPosition(position, false);
     }
 
     /**
